@@ -11,7 +11,7 @@ class IPAM:
             cropped_image = image[top:-bottom, left:-right, :]
             return cropped_image
 
-    def flip_upside_down(self, image):
+    def upside_down(self, image):
             """
             The flip_upside_down method takes an image as input and returns the same image flipped upside down. It uses the NumPy function np.flipud() to flip the rows of the input image along the vertical axis.
             This function reverses the order of rows in the array, effectively flipping the image vertically. The flipped image is then returned by the method.
@@ -19,7 +19,7 @@ class IPAM:
             flipped_image = np.flipud(image)
             return flipped_image
 
-     def find_mirror_image(self, image):
+     def mirror_image(self, image):
             """
             The find_mirror_image() method finds the mirror image of a given image using NumPy's fliplr() function.
             NumPy's fliplr() function is used to flip the image along the vertical axis i.e., the columns of the image are reversed from left to right, effectively creating a mirror image of the original image.

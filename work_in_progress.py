@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 class IPAM:
 
-    def crop_image(self, image, top=10, bottom= 10 , left= 10 , right = 10):
+    def crop_image(self, image, top=30, bottom= 30 , left= 30 , right = 30):
             """
             The crop_image method crops an input image by removing the specified number of pixels from the top, bottom, left, and right sides of the image.
             It takes the input image as a NumPy array and the values top, bottom, left, and right as parameters which represent the number of pixels to be removed from the respective sides of the image.
@@ -11,22 +11,7 @@ class IPAM:
             cropped_image = image[top:-bottom, left:-right, :]
             return cropped_image
 
-    def upside_down(self, image):
-            """
-            The flip_upside_down method takes an image as input and returns the same image flipped upside down. It uses the NumPy function np.flipud() to flip the rows of the input image along the vertical axis.
-            This function reverses the order of rows in the array, effectively flipping the image vertically. The flipped image is then returned by the method.
-            """
-            flipped_image = np.flipud(image)
-            return flipped_image
-
-     def mirror_image(self, image):
-            """
-            The find_mirror_image() method finds the mirror image of a given image using NumPy's fliplr() function.
-            NumPy's fliplr() function is used to flip the image along the vertical axis i.e., the columns of the image are reversed from left to right, effectively creating a mirror image of the original image.
-            In other words, the method takes an image as input and returns the mirror image of the input image as output.
-            """
-            mirror_image = np.fliplr(image)
-            return mirror_image
+ 
 
     def grayscale(self, image):
             """
@@ -37,7 +22,7 @@ class IPAM:
             grayscale_image = np.dot(image, [0.2989, 0.5870, 0.1140])
             return grayscale_image
 
-    def blur_image(self, image, extent):
+    def blurred_image(self, image, extent):
             """
             This function takes an image and a value 'extent' as input, and applies Gaussian blurring to the image. The 'extent' parameter controls the extent of the blur effect. The larger the value of extent, the greater the extent of blurring applied to the image.
             The function first calculates the size of the kernel required for blurring based on the value of 'extent'. This is done by multiplying 3 times the extent value and then taking the next odd integer greater than that. This is because Gaussian kernels are usually odd-sized to ensure that they have a center pixel.
@@ -52,5 +37,19 @@ class IPAM:
             blurred_image = np.apply_along_axis(lambda x: np.convolve(x, k, mode='same'), axis=0, arr=np.apply_along_axis(lambda x: np.convolve(x, k, mode='same'), axis=1, arr=image))
             blurred_image = np.clip(blurred_image, 0, 255).astype(np.uint8) # Add normalization step
             return blurred_image
-
+     def solarization(self, image, threshold):
+        """
+        The solarization method applies a solarization effect to an image using the NumPy library. Solarization is a technique in photography where the image tones are inverted, creating a dramatic effect.
+        The method takes two parameters - image and threshold. The image parameter is the input image that needs to be solarized. The threshold parameter is the cutoff point that determines which pixel values in the image should be inverted.
+        Inside the method, the O_threshold variable is calculated by multiplying the threshold parameter with 30. Then, using NumPy's where function, the method checks if each pixel in the input image is less than the O_threshold value. If the pixel value is less than O_threshold, then that pixel value is kept as is in the output solarized_image. Otherwise, the pixel value is inverted by subtracting it from 255. Finally, the output solarized_image is clipped to the range of 0 to 255 and returned as a NumPy array of unsigned integers.
+        """
+        #extent_index = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+        #extent = [1,2,3,4,5,6,7,8,9]
+        O_threshold = threshold * 30
+        #if threshold in extent:
+            #output_index = extend.index(threshold)
+        #threshold
+        solarized_image = np.where(image < O_threshold, image, 255 - image)
+        solarized_image = np.clip(solarized_image, 0, 255).astype(np.uint8)
+        return solarized_image
 

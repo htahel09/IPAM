@@ -21,6 +21,26 @@ class IPAM:
             """
             grayscale_image = np.dot(image, [0.2989, 0.5870, 0.1140])
             return grayscale_image
+    def sepia(self,image):
+            """
+            The function first defines a 3x3 sepia filter matrix, which consists of floating-point values ranging from 0 to 1. Each row of the filter matrix represents a different color channel (red, green, and blue) and the columns correspond to the intensity of that channel.
+            Next, the function applies the filter matrix to the image by matrix multiplication, using the numpy library's 'dot' function. Specifically, it multiplies the image matrix by the transpose of the sepia filter matrix. This is done to ensure that each pixel in the image is multiplied by the correct coefficients in the filter matrix.
+            The resulting sepia image is then normalized using the numpy library's 'clip' function to ensure that all values are between 0 and 255, the range for an 8-bit unsigned integer. Any values below 0 are set to 0 and any values above 255 are set to 255.
+            Finally, the image is converted to an 8-bit unsigned integer format using the numpy library's 'astype' function and returned as the output of the function.
+            """
+            sepia_filter = np.array([[0.393, 0.769, 0.189],
+                                         [0.349, 0.686, 0.168],
+                                         [0.272, 0.534, 0.131]])
+            #creating an array with all zeros
+            transposed_matrix = np.zeros_like(sepia_filter)
+            print(transposed_matrix)
+            for i in range(len(sepia_filter)):
+                for j in range(len(sepia_filter[0])):
+                    transposed_matrix[j][i] = sepia_filter[i][j]
+            print(transposed_matrix)
+            sepia_image = np.dot(image,transposed_matrix)
+            sepia_image = np.clip(sepia_image, 0,255).astype(np.uint8)
+            return sepia_image
 
     def blurred_image(self, image, extent):
             """

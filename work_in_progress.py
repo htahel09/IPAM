@@ -88,5 +88,33 @@ class IPAM:
                 orig_y = int(y * original_height / height)
                 resized_image[y, x] = image[orig_y, orig_x]
         return resized_image
+    def color_filter(self, image, color):
+        """
+        The color_filter method applies a custom color filter to an input image based on the specified color. The method takes in two parameters - the input image and the color to be filtered.
+        First, the method initializes an empty list called color_list. Then, based on the specified color, the method appends the appropriate RGB color values to color_list. For example, if the color is "RED", the method appends [1.0, 0.0, 0.0] to color_list (which represents full red, no green, and no blue).
+        Next, the method creates a new array called filtered_image, which is the same shape as the input image. The method then applies the custom color filter to filtered_image by multiplying each color channel of the input image by the corresponding value in color_list. For example, if the color is "RED", the method multiplies the red channel of the input image by 1.0 and sets the green and blue channels to 0.0.
+        `Finally, the resulting filtered_image is clipped between 0 and 255 (to ensure that all values are within the valid range for an image), and returned as an unsigned 8-bit integer array representing the processed image.Apply a custom color filter to an image using NumPy."""
+        color_list =[]
+        if color.upper() == "RED":
+            color_list.append(1.0)
+            color_list.append(0.0)
+            color_list.append(0.0)
 
+        elif color.upper() == "GREEN":
+            color_list.append(0.0)
+            color_list.append(1.0)
+            color_list.append(0.0)
+        elif color.upper() == "BLUE":
+            color_list.append(0.0)
+            color_list.append(0.0)
+            color_list.append(1.0)
+        else:
+            return("Invalid Color")
+            
+        filtered_image = np.zeros_like(image)
+        filtered_image[:,:,0] = image[:,:,0] * color_list[0] # Red channel
+        filtered_image[:,:,1] = image[:,:,1] * color_list[1] # Green channel
+        filtered_image[:,:,2] = image[:,:,2] * color_list[2] # Blue channel
+        filtered_image = np.clip(filtered_image, 0, 255).astype(np.uint8)
+        return filtered_image
 

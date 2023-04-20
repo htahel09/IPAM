@@ -72,4 +72,21 @@ class IPAM:
         solarized_image = np.where(image < O_threshold, image, 255 - image)
         solarized_image = np.clip(solarized_image, 0, 255).astype(np.uint8)
         return solarized_image
+    def resize_image(self, image, new_shape):
+        """
+        This method resizes an image to a new shape using NumPy. It creates a new image with the new shape and fills it with zeros.
+        Then, for each pixel in the new image, it calculates the corresponding pixel in the original image using a simple scaling operation based on the ratios of the new and original image dimensions.
+        Finally, it copies the color of the corresponding pixel from the original image to the new image. This process is repeated for all the pixels in the new image, resulting in the resized image.
+        The resulting image may not be of exact size specified, but a close approximation based on the scaling operation.Resize an image to a new shape using NumPy.
+        """
+        resized_image = np.zeros(new_shape, dtype=image.dtype)
+        height, width = new_shape[:2]
+        original_height, original_width = image.shape[:2]
+        for y in range(height):
+            for x in range(width):
+                orig_x = int(x * original_width / width)
+                orig_y = int(y * original_height / height)
+                resized_image[y, x] = image[orig_y, orig_x]
+        return resized_image
+
 

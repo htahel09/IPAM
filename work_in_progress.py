@@ -14,12 +14,24 @@ class IPAM:
  
 
     def grayscale(self, image):
-            """
-            The grayscale function takes an input image as a NumPy array and returns a grayscale version of that image. The function uses the dot product of the input image with a set of weights [0.2989, 0.5870, 0.1140] to convert the RGB image to grayscale. These weights are used to determine how much weight to assign to each of the red, green, and blue channels when converting to grayscale.
-            The dot product of the input image and the weight matrix gives a new image where each pixel value is a weighted average of the R, G, and B values of the corresponding pixel in the original image.
-            The resulting grayscale image has only one channel instead of three channels for red, green, and blue.
-            """
-            grayscale_image = np.dot(image, [0.2989, 0.5870, 0.1140])
+        """
+        The grayscale function takes an input image as a NumPy array and returns a grayscale version of that image. The function uses the dot product of the input image with a set of weights [0.2989, 0.5870, 0.1140] to convert the RGB image to grayscale. These weights are used to determine how much weight to assign to each of the red, green, and blue channels when converting to grayscale.
+        The dot product of the input image and the weight matrix gives a new image where each pixel value is a weighted average of the R, G, and B values of the corresponding pixel in the original image.
+        The resulting grayscale image has only one channel instead of three channels for red, green, and blue.
+        """
+        red_coeff = 0.2989
+        green_coeff = 0.5870
+        blue_coeff = 0.1140
+
+        red_chan = image[:,:,0]
+        green_chan = image[:,:,1]
+        blue_chan = image[:,:,2]
+        
+        gray_red = red_chan * red_coeff
+        gray_green = green_chan * green_coeff
+        gray_blue = blue_chan * blue_coeff
+        grays_image = gray_red+ gray_green + gray_blue
+        return grays_image
             return grayscale_image
     def sepia(self,image):
             """

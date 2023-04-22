@@ -55,3 +55,21 @@ class IPAM:
         textured_image = np.where(image > 128, texture, image)
         textured_image = np.clip(textured_image, 0, 255).astype(np.uint8)
         return textured_image
+    def rotate_180(self, image):
+        """
+        The rotate_180 method rotates an input image by 180 degrees using the NumPy rot90 function.
+        rot90 function is used to rotate an array by 90 degrees in the plane specified by axes. The first parameter specifies the input array that needs to be rotated.
+        The second parameter k specifies the number of times the array needs to be rotated by 90 degrees, and it can be a negative or positive integer.
+        In the rotate_180 method, the input image is rotated by 180 degrees, which is equivalent to rotating it two times by 90 degrees using rot90 function.
+        The resulting rotated image is then returned by the method.Rotate an image by 180 degrees using NumPy."""
+        rotated_image = np.rot90(image, 2)
+        return rotated_image
+
+    def invert_image(self, image):
+        """
+        The invert_image() method takes an input image as a NumPy array and returns a new NumPy array with inverted colors.
+        To invert the colors, the method subtracts each pixel value from 255 (the maximum possible pixel value in an 8-bit grayscale image).
+        For example, if a pixel in the input image has a value of 100, the corresponding pixel in the inverted image will have a value of 155 (255-100=155).
+        This process is repeated for each pixel in the image, resulting in an inverted image.Invert the colors of an image using NumPy."""
+        inverted_image = 255 - image
+        return inverted_image

@@ -1,7 +1,10 @@
 import numpy as np
 import matplotlib.pyplot as plt
 class IPAM:
-
+    def image_format(self, image):
+        image_for = plt.imread(image)
+        return image_for
+    
     def grayscale(self, image,output_file):
         """
         The grayscale function takes an input image as a NumPy array and returns a grayscale version of that image.

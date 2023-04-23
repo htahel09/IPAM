@@ -118,7 +118,7 @@ class IPAM:
         plt.imsave(output_file, vignette_image)
 
     
-    def bright_image(self, image,extent=1):
+    def bright_image(self, image,output_file,extent=1):
         """
         This method takes an image array and an extent parameter as input. The extent parameter specifies the brightness level of the output image.
         The method then computes a bright_image by adding the extent multiplied by 2/5 to the input image array.

@@ -22,7 +22,7 @@ class IPAM:
         grays_image = gray_red+ gray_green + gray_blue
         plt.imsave(output_file, grays_image)
            
-    def sepia(self,image, output_file):
+    def sepia_effect(self,image, output_file):
         """
         The function first defines a 3x3 sepia filter matrix, which consists of floating-point values ranging from 0 to 1. Each row of the filter matrix represents a different color channel (red, green, and blue) and the columns correspond to the intensity of that channel.
         Next, the function applies the filter matrix to the image by matrix multiplication, using the numpy library's 'dot' function. Specifically, it multiplies the image matrix by the transpose of the sepia filter matrix. This is done to ensure that each pixel in the image is multiplied by the correct coefficients in the filter matrix.

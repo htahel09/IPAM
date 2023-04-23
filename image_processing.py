@@ -92,7 +92,7 @@ class IPAM:
         blurred_image = np.clip(blurred_image, 0, 255).astype(np.uint8) # Add normalization step
         plt.imsave(output_file,blurred_image)
 
-        def clockwise_rotatation_image(self, image, output_file):
+    def clockwise_rotatation(self, image, output_file):
         """
         The clock_rotate_image method takes an input image and rotates it by 90 degrees clockwise using NumPy.
         This is done using the rot90() function in NumPy, which rotates an array by 90 degrees in the plane specified by the two axes.
@@ -101,7 +101,7 @@ class IPAM:
         rotated_image = np.rot90(image, k=-1)
         plt.imsave(output_file, rotated_image)
 
-    def anticlock_rotatation_image(self, image, output_file):
+    def anticlock_rotatation(self, image, output_file):
         """
         The anticlock_rotate_image method in the given code rotates an input image by 90 degrees anticlockwise using NumPy's rot90 function.
         The rot90 function is a NumPy method that rotates an array by 90 degrees in the counter-clockwise direction or k times (if k is provided as an argument).
@@ -112,7 +112,7 @@ class IPAM:
         rotated_image = np.rot90(image,1)
         plt.imsave(output_file, rotated_image)
         
-    def rotate_image(self, image, angle, output_file):
+    def rotate_image_by_angle(self, image, angle, output_file):
         """
         This function rotate_image rotates an input image by a given angle in degrees using NumPy. It first converts the input angle to radians using the np.deg2rad() function. It then creates an output rotated_image array with the same shape as the input image using np.zeros_like().
         Next, it loops through each pixel in the input image and calculates its new position in the rotated image based on the rotation matrix formula

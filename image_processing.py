@@ -1,3 +1,5 @@
+import numpy as np 
+import matplotlib.pyplot as plt
 class IPAM:
 
     def mirror_image(self, image,output_file):

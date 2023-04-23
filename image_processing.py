@@ -101,7 +101,7 @@ class IPAM:
         rotated_image = np.rot90(image, k=-1)
         plt.imsave(output_file, rotated_image)
 
-    def anticlock_rotatation(self, image, output_file):
+    def anticlockwise_rotatation(self, image, output_file):
         """
         The anticlock_rotate_image method in the given code rotates an input image by 90 degrees anticlockwise using NumPy's rot90 function.
         The rot90 function is a NumPy method that rotates an array by 90 degrees in the counter-clockwise direction or k times (if k is provided as an argument).

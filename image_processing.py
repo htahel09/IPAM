@@ -15,7 +15,7 @@ class IPAM:
         """
         This method finds the mirror image of a given image using NumPy's fliplr() function.
         Input :- Image - .jpg
-        Output_file - string
+                 Output_file - string
 
         """
         #fliplr() function is used to flip the image along the vertical axis.
@@ -42,8 +42,8 @@ class IPAM:
         This method applies a texture effect to an image using NumPy.
         The resulting array is clipped between 0 and 255 and returned as an unsigned 8-bit integer array representing the processed image.
         Input:-   Image - .jpg
-                    Output_file- string
-                    Extent - int
+                  Output_file- string
+                  Extent - int
         """
         texture = extent * 50
         # where() method creates a new array where values greater than 128 in the input image are replaced with the calculated texture value, and all other values are left unchanged.
@@ -57,7 +57,7 @@ class IPAM:
         s.
         This function rotates the image twice by 90 degrees using rot90 function. which results in a 180 degree rotation.
         Input:-   Image - .jpg
-                    Output_file- string
+                  Output_file- string
         """
         #rot90 function is used to rotate an array by 90 degrees in the plane specified by axe
         rotated_image = np.rot90(self.image_format(image), 2)
@@ -67,7 +67,7 @@ class IPAM:
         """
         This method inverts an input image by subtracting each pixel value from 255 (the maximum possible pixel value in an 8-bit grayscale image).
         Input:-   Image - .jpg
-                    Output_file- string
+                  Output_file- string
        """
         inverted_image = 255 - self.image_format(image)
         plt.imsave(output_file,inverted_image)
@@ -77,7 +77,7 @@ class IPAM:
         This method takes an image as input and flips it upside down
         This function reverses the order of rows in the array, effectively flipping the image vertically
                 Input:-   Image - .jpg
-                            Output_file- string
+                          Output_file- string
         """
         #Function np.flipud() used to flip the rows of the input image along the vertical axis
         flipped_image = np.flipud(self.image_format(image))
@@ -88,8 +88,8 @@ class IPAM:
         This function takes an image and a value extentnas input, and applies Gaussian blurring to the image. The extent parameter controls the extent of the blur effect.
         The larger value of extent, the greater the extent of blurring applied to the image.
         Input:-   Image - .jpg
-                    Output_file- string
-                    Extent - int
+                  Output_file- string
+                  Extent - int
         """
         k_size = int(3 * extent) * 2 + 1
         # the exp function creates a 1D Gaussian kernel.
@@ -105,7 +105,7 @@ class IPAM:
         """
         This method takes an input image and rotates it by 90 degrees clockwise using NumPy.
         Input:-   Image - .jpg
-                    Output_file- string
+                  Output_file- string
         """
         # rot90() function rotates an array by 90 degrees which is equal to rotating it counter clockwise by 270 degrees thats why k equals to -1
         rotated_image = np.rot90(self.image_format(image), k=-1)

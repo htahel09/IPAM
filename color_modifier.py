@@ -57,7 +57,7 @@ class IPAM1:
         #imsave function to save the processed file
         plt.imsave(output_file, sepia_image)
         
-   def solarization(self, image, output_file,threshold=7):
+    def solarization(self, image, output_file,threshold=7):
         """
         The solarization method applies a solarization effect to an image.
         Input:-   Image - .jpg
@@ -74,7 +74,7 @@ class IPAM1:
         solarized_image = np.where(self.image_format(image) < O_threshold, self.image_format(image), 255 - self.image_format(image))
         solarized_image = np.clip(solarized_image, 0, 255).astype(np.uint8)
         #imsave function to save the processed file
-        plt.imsave(output_file, solarized_image))
+        plt.imsave(output_file, solarized_image)
    
     def color_filter(self, image,output_file, color = "red"):
         """

@@ -10,13 +10,9 @@ There are certain libraries available for image processing with the similar func
 Examples:
 
 # cropping an image and increasing the brightness
-from image_processing 
+from image_processing import IPAM1
 
-import IPAM1
-
-from color_modifier 
-
-import IPAM2
+from color_modifier import IPAM2
 
 ipam1 = IPAM1()
 
@@ -27,18 +23,14 @@ ipam2 = IPAM2()
 ipam2.brightness_adjustment("rose.jpg","output_image2.jpg")
 
 # applying vignette effect
-from color_modifier 
-
-import IPAM2
+from color_modifier import IPAM2
 
 ipam2 = IPAM2()
 
 ipam2.vignette_effect("rose.jpg","output_image2.jpg")
 
 # textured image
-from image_processing 
-
-import IPAM1
+from image_processing import IPAM1
 
 ipam1 = IPAM1()
 

@@ -20,6 +20,8 @@ class IPAM:
         """
         #fliplr() function is used to flip the image along the vertical axis.
         mirror_image = np.fliplr(self.image_format(image))
+        # this imsave function is used to save the processed image
+
         plt.imsave(output_file, mirror_image)
 
     def crop_image(self, image,output_file, left=60, right= 60 , top= 60 , bottom = 60):
@@ -35,6 +37,8 @@ class IPAM:
         
         """
         cropped_image = self.image_format(image)[left:-right, top:-bottom, :]
+        # this imsave function is used to save the processed image
+
         plt.imsave(output_file, cropped_image)
                 
     def texture_effect(self, image, output_file, extent=7 ):
@@ -49,6 +53,7 @@ class IPAM:
         # where() method creates a new array where values greater than 128 in the input image are replaced with the calculated texture value, and all other values are left unchanged.
         textured_image = np.where(self.image_format(image) > 128, texture, self.image_format(image))
         textured_image = np.clip(textured_image, 0, 255).astype(np.uint8)
+        # this imsave function is used to save the processed image
         plt.imsave(output_file, textured_image)
         
     def rotate_180(self, image, output_file):
@@ -61,6 +66,7 @@ class IPAM:
         """
         #rot90 function is used to rotate an array by 90 degrees in the plane specified by axe
         rotated_image = np.rot90(self.image_format(image), 2)
+        # this imsave function is used to save the processed image
         plt.imsave(output_file, rotated_image)
 
     def invert_image(self, image, output_file):
@@ -70,6 +76,8 @@ class IPAM:
                   Output_file- string
        """
         inverted_image = 255 - self.image_format(image)
+        # this imsave function is used to save the processed image
+
         plt.imsave(output_file,inverted_image)
             
     def upside_down(self, image, output_file):
@@ -81,6 +89,7 @@ class IPAM:
         """
         #Function np.flipud() used to flip the rows of the input image along the vertical axis
         flipped_image = np.flipud(self.image_format(image))
+        # this imsave function is used to save the processed image
         plt.imsave(output_file, flipped_image)
         
     def blurred_image(self, image, output_file, extent=7):
@@ -99,6 +108,7 @@ class IPAM:
         blurred_image = np.apply_along_axis(lambda x: np.convolve(x, k, mode='same'), axis=0, arr=np.apply_along_axis(lambda x: np.convolve(x, k, mode='same'), axis=1, arr=self.image_format(image)))
         #the blurred image is normalized and converted to an 8-bit unsigned integer format using clip and astype functions
         blurred_image = np.clip(blurred_image, 0, 255).astype(np.uint8) 
+        # this imsave function is used to save the processed imag
         plt.imsave(output_file,blurred_image)
 
     def clockwise_rotation(self, image, output_file):
@@ -109,6 +119,7 @@ class IPAM:
         """
         # rot90() function rotates an array by 90 degrees which is equal to rotating it counter clockwise by 270 degrees thats why k equals to -1
         rotated_image = np.rot90(self.image_format(image), k=-1)
+        # this imsave function is used to save the processed imag
         plt.imsave(output_file, rotated_image)
 
     def anticlockwise_rotation(self, image, output_file):
@@ -119,4 +130,5 @@ class IPAM:
         """
         # rot90() function rotates an array by 90 degrees 
         rotated_image = np.rot90(self.image_format(image),1)
+        # this imsave function is used to save the processed imag
         plt.imsave(output_file, rotated_image)

@@ -11,18 +11,27 @@ Examples:
 
 # cropping an image and increasing the brightness
 from image_processing import IPAM1
+
 from color_modifier import IPAM2
+
 ipam1 = IPAM1()
+
 ipam1.crop_image("rose.jpg","output_file1.jpg",left=100, right=100, top=200, bottom=200)
+
 ipam2 = IPAM2()
+
 ipam2.brightness_adjustment("rose.jpg","output_image2.jpg")
 
 # applying vignette effect
 from color_modifier import IPAM2
+
 ipam2 = IPAM2()
+
 ipam2.vignette_effect("rose.jpg","output_image2.jpg")
 
 # textured image
 from image_processing import IPAM1
+
 ipam1 = IPAM1()
+
 ipam1.texture_effect("rose.jpg","textured_image.jpg")

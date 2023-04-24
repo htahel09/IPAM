@@ -46,18 +46,18 @@ class IPAM1:
                                      [0.272, 0.534, 0.131]])
         #creating an array with all zeros
         transposed_matrix = np.zeros_like(sepia_filter)
-        print(transposed_matrix)
+        
         for i in range(len(sepia_filter)):
             for j in range(len(sepia_filter[0])):
                 transposed_matrix[j][i] = sepia_filter[i][j]
-        print(transposed_matrix)
+        
         sepia_image = np.dot(self.image_format(image),transposed_matrix)
         #clip function is used to normalize the image whereas astype for 8 bit 
         sepia_image = np.clip(sepia_image, 0,255).astype(np.uint8)
         #imsave function to save the processed file
         plt.imsave(output_file, sepia_image)
         
-    def solarization(self, image, output_file,threshold=7):
+   def solarization(self, image, output_file,threshold=7):
         """
         The solarization method applies a solarization effect to an image.
         Input:-   Image - .jpg
@@ -71,10 +71,10 @@ class IPAM1:
         #if threshold in extent:
             #output_index = extend.index(threshold)
         #threshold
-        solarized_image = np.where(image < O_threshold, image, 255 - image)
+        solarized_image = np.where(self.image_format(image) < O_threshold, self.image_format(image), 255 - self.image_format(image))
         solarized_image = np.clip(solarized_image, 0, 255).astype(np.uint8)
         #imsave function to save the processed file
-        plt.imsave(output_file, solarized_image)
+        plt.imsave(output_file, solarized_image))
    
     def color_filter(self, image,output_file, color = "red"):
         """

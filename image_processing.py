@@ -1,6 +1,9 @@
 import numpy as np 
 import matplotlib.pyplot as plt
 class IPAM:
+    def image_format(self, image):
+        image_for = plt.imread(image)
+        return image_for
 
     def mirror_image(self, image,output_file):
         """

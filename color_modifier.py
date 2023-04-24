@@ -1,6 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
 class IPAM1:
+    def __init__(self):
+        pass
+       
     def image_format(self, image):
         """
         This method converts an image to an array usinf matplotlib library.

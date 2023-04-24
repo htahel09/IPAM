@@ -5,20 +5,21 @@ The package consists modules, classes and methods for better code organization, 
 Two external libraries is been used in making IPAM. Numpy for manipulation of the arrays whereas Matplotlib for importing and saving the images.
 There are certain libraries available for image processing with the similar functionality, including OpenCV, scikit-image, etc. However, our library is distinct in the way, we have performed the operations in addition to its simple layout that can easily be understood and used by beginners.
 Examples:
-# cropping an image and then increasing its brightness
-import numpy as np
-import matplotlib.pyplot as plt
-from color_modifier import IPAM
-from image_processing import IPAM
-ipam = IPAM()
-ipam.crop_image("rose.jpg","output_file" left=100, right=100, top=200, bottom=200)
-ipam.brightness_adjustment("rose.jpg","output_image")
 
-#color_filter
-import numpy as np
-import matplotlib.pyplot as plt
-from color_modifier import IPAM
-from image_processing import IPAM
-image 
+# cropping an image and increasing the brightness
+from image_processing import IPAM1
+from color_modifier import IPAM2
+ipam1 = IPAM1()
+ipam1.crop_image("rose.jpg","output_file1.jpg",left=100, right=100, top=200, bottom=200)
+ipam2 = IPAM2()
+ipam2.brightness_adjustment("rose.jpg","output_image2.jpg")
 
+# applying vignette effect
+from color_modifier import IPAM2
+ipam2 = IPAM2()
+ipam2.vignette_effect("rose.jpg","output_image2.jpg")
 
+# textured image
+from image_processing import IPAM1
+ipam1 = IPAM1()
+ipam1.texture_effect("rose.jpg","textured_image.jpg")

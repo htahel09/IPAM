@@ -1,6 +1,6 @@
 import numpy as np 
 import matplotlib.pyplot as plt
-class IPAM:
+class IPAM2:
     def image_format(self, image):
         """
         This method converts an image to an array.

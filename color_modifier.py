@@ -2,16 +2,21 @@ import numpy as np
 import matplotlib.pyplot as plt
 class IPAM:
     def image_format(self, image):
+        """
+        This method converts an image to an array usinf matplotlib library.
+        Input :- Image - .jpg
+        Ouput :- Array
+        """
         image_for = plt.imread(image)
         return image_for
     
     def grayscale(self, image,output_file):
         """
-        The grayscale function takes an input image as a NumPy array and returns a grayscale version of that image.
-        The function uses the dot product of the input image with a set of weights [0.2989, 0.5870, 0.1140] to convert the RGB image to grayscale.
-        These weights are used to determine how much weight to assign to each of the red, green, and blue channels when converting to grayscale.
-        The dot product of the input image and the weight matrix gives a new image where each pixel value is a weighted average of the R, G, and B values of the corresponding pixel in the original image.
-        The resulting grayscale image has only one channel instead of three channels for red, green, and blue.
+        This function finds the grayscale version of the input image.
+        It uses the dot product of the input image with a set of weights [0.2989, 0.5870, 0.1140] to convert the RGB image to grayscale.
+        This method converts an image to an array.
+        Input :- Image - .jpg
+        Ouput :- Array
         """
         red_coeff = 0.2989
         green_coeff = 0.5870
@@ -25,17 +30,16 @@ class IPAM:
         gray_green = green_chan * green_coeff
         gray_blue = blue_chan * blue_coeff
         grays_image = gray_red+ gray_green + gray_blue
+        # this imsave function is used to save the processed image
         plt.imsave(output_file, grays_image)
            
     def sepia_effect(self,image, output_file):
         """
-        The function first defines a 3x3 sepia filter matrix, which consists of floating-point values ranging from 0 to 1.
-        Each row of the filter matrix represents a different color channel (red, green, and blue) and the columns correspond to the intensity of that channel.
-        Next, the function applies the filter matrix to the image by matrix multiplication, using the numpy library's 'dot' function.
-        Specifically, it multiplies the image matrix by the transpose of the sepia filter matrix. This is done to ensure that each pixel in the image is multiplied by the correct coefficients in the filter matrix.
-        The resulting sepia image is then normalized using the numpy library's 'clip' function to ensure that all values are between 0 and 255, the range for an 8-bit unsigned integer.
-        Any values below 0 are set to 0 and any values above 255 are set to 255.
-        Finally, the image is converted to an 8-bit unsigned integer format using the numpy library's 'astype' function and returned as the output of the function.
+        This function adds the sepia filter to the input image.
+        Every row of the filter matrix represents a different color (red, green, and blue) 
+        Input:-   Image - .jpg
+                  Output_file- string
+        
         """
         sepia_filter = np.array([[0.393, 0.769, 0.189],
                                      [0.349, 0.686, 0.168],
@@ -48,14 +52,18 @@ class IPAM:
                 transposed_matrix[j][i] = sepia_filter[i][j]
         print(transposed_matrix)
         sepia_image = np.dot(self.image_format(image),transposed_matrix)
+        #clip function is used to normalize the image whereas astype for 8 bit 
         sepia_image = np.clip(sepia_image, 0,255).astype(np.uint8)
+        #imsave function to save the processed file
         plt.imsave(output_file, sepia_image)
         
-    def solarization(self, image, threshold, output_file):
+    def solarization(self, image, output_file,threshold=7):
         """
-        The solarization method applies a solarization effect to an image using the NumPy library. Solarization is a technique in photography where the image tones are inverted, creating a dramatic effect.
-        The method takes two parameters - image and threshold. The image parameter is the input image that needs to be solarized. The threshold parameter is the cutoff point that determines which pixel values in the image should be inverted.
-        Inside the method, the O_threshold variable is calculated by multiplying the threshold parameter with 30. Then, using NumPy's where function, the method checks if each pixel in the input image is less than the O_threshold value. If the pixel value is less than O_threshold, then that pixel value is kept as is in the output solarized_image. Otherwise, the pixel value is inverted by subtracting it from 255. Finally, the output solarized_image is clipped to the range of 0 to 255 and returned as a NumPy array of unsigned integers.
+        The solarization method applies a solarization effect to an image.
+        Input:-   Image - .jpg
+                  Output_file- string
+                  threshold - int ranging from(1 to 10)
+        
         """
         #extent_index = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
         #extent = [1,2,3,4,5,6,7,8,9]
@@ -65,14 +73,17 @@ class IPAM:
         #threshold
         solarized_image = np.where(image < O_threshold, image, 255 - image)
         solarized_image = np.clip(solarized_image, 0, 255).astype(np.uint8)
+        #imsave function to save the processed file
         plt.imsave(output_file, solarized_image)
    
     def color_filter(self, image,output_file, color = "red"):
         """
-        The color_filter method applies a custom color filter to an input image based on the specified color. The method takes in two parameters - the input image and the color to be filtered.
-        First, the method initializes an empty list called color_list. Then, based on the specified color, the method appends the appropriate RGB color values to color_list. For example, if the color is "RED", the method appends [1.0, 0.0, 0.0] to color_list (which represents full red, no green, and no blue).
-        Next, the method creates a new array called filtered_image, which is the same shape as the input image. The method then applies the custom color filter to filtered_image by multiplying each color channel of the input image by the corresponding value in color_list. For example, if the color is "RED", the method multiplies the red channel of the input image by 1.0 and sets the green and blue channels to 0.0.
-        `Finally, the resulting filtered_image is clipped between 0 and 255 (to ensure that all values are within the valid range for an image), and returned as an unsigned 8-bit integer array representing the processed image.Apply a custom color filter to an image using NumPy."""
+        The color_filter method applies a custom color filter to an input image based on the specified color. 
+        Input:-   Image - .jpg
+                  Output_file- string
+                  Extent - string out of ("red", "green", "blue")
+        """
+        #creating an empty list
         color_list =[]
         if color.upper() == "RED":
             color_list.append(1.0)
@@ -89,31 +100,38 @@ class IPAM:
             color_list.append(1.0)
         else:
             return("Invalid Color")
-            
+        #zeros_likes creates a new array of zeros with the desired shape
         filtered_image = np.zeros_like(self.image_format(image))
         filtered_image[:,:,0] = self.image_format(image)[:,:,0] * color_list[0] # Red channel
         filtered_image[:,:,1] = self.image_format(image)[:,:,1] * color_list[1] # Green channel
         filtered_image[:,:,2] = self.image_format(image)[:,:,2] * color_list[2] # Blue channel
+        #clip function is used to limit values in an array between a minimum and maximum value
+        #astype function is used to cast an array to a new data type
         filtered_image = np.clip(filtered_image, 0, 255).astype(np.uint8)
+        #imsave function to save the processed file
         plt.imsave(output_file, filtered_image)
         
     def vignette_effect(self,image,output_file,extent=5 ):
         """
-        The apply_vignette_effect method applies a vignette effect to an input image.
-        The extent parameter controls the strength of the effect, with a larger value resulting in a more pronounced vignette.
-        The method first computes the distance of each pixel from the center of the image, and computes a vignette mask based on a power function of the distance.
-        The mask is then clipped between 0 and 1. The method then applies a variable size filter to the input image using the extent parameter, and multiplies the filtered image with the vignette mask. The resulting image is then clipped between 0 and 255, and converted to a uint8 data type before being returned. The vignette effect darkens the image at the edges, creating a circular or oval shaped fade-out effect that draws the viewer's attention towards the center of the image.
+        This method applies a vignette effect to an input image.
+        The extent parameter controls the strength of the effect, with a larger value resulting in a more pronounced vignette
+        Input:-   Image - .jpg
+                  Output_file- string
+                  Extent - int ranging from(1 to 10)
         """
         if extent < 1:
             extent = 1
         elif extent > 10:
             extent = 10
         power = extent / 2
+        #indices function to create an array of indices that can be used to index into multi-dimensional arrays
         y, x = np.indices(self.image_format(image).shape[:2])
         center_y, center_x = self.image_format(image).shape[0] // 2, self.image_format(image).shape[1] // 2
+        # the square root of the input array(sqrt)
         distance = np.sqrt((x - center_x) ** 2 + (y - center_y) ** 2)
         max_distance = np.sqrt(center_x ** 2 + center_y ** 2)
         vignette = 1 - (distance / max_distance) ** power
+        #clip function is used to limit values in an array between a minimum and maximum value
         vignette = np.clip(vignette, 0, 1)
         size = int(np.round(2 + extent / 10 * (self.image_format(image).shape[0] - 2)))
         kernel = np.ones((size, size), np.uint8)
@@ -121,17 +139,22 @@ class IPAM:
         for c in range(self.image_format(image).shape[2]):
             filtered_image[:,:,c] = np.minimum(self.image_format(image)[:,:,c], np.abs(np.fft.ifft2(np.fft.fft2(self.image_format(image)[:,:,c]) * np.fft.fft2(kernel, s=self.image_format(image).shape[:2]))))
         vignette_image = filtered_image * vignette[..., np.newaxis]
+        #clip function is used to limit values in an array between a minimum and maximum value
+        #astype function is used to cast an array to a new data type
         vignette_image = np.clip(vignette_image, 0, 255).astype(np.uint8)
+        #imsave function to save the processed file
         plt.imsave(output_file, vignette_image)
         
-    def brightness_adjustment(self, image,output_file,extent=5):
+    def brightness_adjustment(self, image,output_file,extent=10):
         """
         This method takes an image array and an extent parameter as input. The extent parameter specifies the brightness level of the output image.
         The method then computes a bright_image by adding the extent multiplied by 2/5 to the input image array.
-        This value is clipped between 0 and 255 to ensure that the output image has pixel values within the valid range of 0 to 255. Finally, the method returns the bright_image array with dtype np.uint8.
-        Overall, this method increases the brightness level of an image by adding a constant value to all pixel values.
+        Input:-   Image - .jpg
+                  Output_file- string
+                  Extent - int
         """
         brightness = extent * 2/5
         bright_image = np.clip(self.image_format(image) + brightness, 0, 255).astype(np.uint8)
+        #imsave function to save the processed file
         plt.imsave(output_file, bright_image)
 

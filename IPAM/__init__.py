@@ -1,4 +1,5 @@
-from image_processing import IPAM2 
-from color_modifier import IPAM1
-import matplotlib.pyplot as plt
 import numpy as np
+import matplotlib.pyplot as plt
+from IPAM.color_modifier import IPAM1
+from  IPAM.image_processing import IPAM2
+
